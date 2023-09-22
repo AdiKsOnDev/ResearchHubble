@@ -43,33 +43,33 @@ class LoginBox extends Component {
     const { username, password, error } = this.state;
 
     return (
-      <div className="bg-slate-800 text-slate-50 w-fit">
-        <h2 className="font-semibold">Login</h2>
+      <div className="bg-metal w-fit p-10 items-center rounded-lg">
+        <h2 className="font-semibold text-center mb-7 text-3xl text-bone">Sign In</h2>
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
+          <div className="flex flex-col justify-center items-center">
             <input
               type="text"
+              className='mb-4 p-2 rounded-md bg-bone'
               id="username"
               name="username"
               value={username}
               onChange={this.handleInputChange}
+              placeholder='Username'
             />
-          </div>
 
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
             <input
               type="password"
+              className='mb-5 p-2 rounded-md bg-bone'
               id="password"
               name="password"
               value={password}
               onChange={this.handleInputChange}
+              placeholder='Password'
             />
-          </div>
           
-          {error && <p className="error">{error}</p>}
-          <button type="submit">Login</button>
+            {error && <p className="error">{error}</p>}
+            <button className="text-bone bg-grass font-semibold p-1 w-20 rounded-md" type="submit">Login</button>
+          </div>
         </form>
       </div>
     );

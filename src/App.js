@@ -3,8 +3,10 @@ import LoginBox from './components/LoginBox';
 
 function App() {
   return (
-    <LoginBox>
-    </LoginBox>
+    <div className='bg-midnight min-w-max flex justify-center items-center h-screen'>
+      <LoginBox>
+      </LoginBox>
+    </div>
   );
 }
 
