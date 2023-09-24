@@ -1,12 +1,22 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './styles.css';
-import LoginBox from './components/LoginBox';
+
+// Components
+import Login from './components/Login';
+import Register from './components/Register';
+import Home from './components/Home';
 
 function App() {
   return (
-    <div className='bg-midnight min-w-max flex justify-center items-center h-screen'>
-      <LoginBox>
-      </LoginBox>
+  <Router>
+    <div>
+      <Routes>
+        <Route exact path="/Login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
     </div>
+  </Router>
   );
 }
 

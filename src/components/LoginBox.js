@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import '../styles.css'
+import { ReactComponent as GoogleSvg } from '../Assets/google-icon.svg';
+import { auth, provider } from '../firebase';
 
 class LoginBox extends Component {
   constructor(props) {
@@ -26,7 +28,7 @@ class LoginBox extends Component {
 
     // Basic validation - check if username and password are not empty
     if (!username || !password) {
-      this.setState({ error: 'Please enter both username and password.' });
+      this.setState({ error: 'Wrong E-Mail OR Password' });
       return;
     }
 
@@ -39,6 +41,11 @@ class LoginBox extends Component {
     this.setState({ username: '', password: '' });
   };
 
+  auth = (e) => {
+    console.log("HEHE");
+    auth.signInWithPopup(provider);
+  }
+
   render() {
     const { username, password, error } = this.state;
 
@@ -49,7 +56,7 @@ class LoginBox extends Component {
           <div className="flex flex-col justify-center items-center">
             <input
               type="text"
-              className='mb-4 p-2 rounded-md bg-bone'
+              className='mb-5 p-2 rounded-md bg-bone'
               id="username"
               name="username"
               value={username}
@@ -67,8 +74,16 @@ class LoginBox extends Component {
               placeholder='Password'
             />
           
-            {error && <p className="error">{error}</p>}
-            <button className="text-bone bg-grass font-semibold p-1 w-20 rounded-md" type="submit">Login</button>
+            {error && <p className="text-blood italic mb-5 text-xs">{error}</p>}
+
+            <button className="text-bone bg-grass font-semibold text-lg px-8 py-2 w-30 rounded-md mb-5" type="submit">Login</button>
+
+            <h1 className='font-semibold text-3xl text-bone mb-5'>OR</h1>
+            
+            <button className="flex flex-row items-center text-midnight text-lg text-left bg-bone font-semibold px-5 w-full rounded-md" onClick={this.auth}>
+              <GoogleSvg className='w-7 mr-8' /> 
+              <h1>Sign in using Google</h1>
+            </button>
           </div>
         </form>
       </div>
