@@ -10,7 +10,8 @@ module.exports = {
       'midnight': '#0C0D11',
       'metal': '#1E1E1E',
       'grass': '#238636',
-      'blood': "#FF0000"
+      'blood': "#FF0000",
+      'night': '#171A25'
     },
     extend: {},
   },

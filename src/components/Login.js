@@ -1,10 +1,11 @@
+import Header from "./Header";
 import LoginBox from "./LoginBox";
 
 function Login() {
   return ( 
-    <div className='bg-midnight min-w-max flex justify-center items-center h-screen'>
-      <LoginBox>
-      </LoginBox>
+    <div className='flex flex-col bg-midnight min-w-max justify-center items-center h-screen'>
+      <Header></Header>
+      <LoginBox></LoginBox>
     </div>
   );
 }

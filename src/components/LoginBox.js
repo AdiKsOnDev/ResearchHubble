@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../styles.css'
 import { ReactComponent as GoogleSvg } from '../Assets/google-icon.svg';
 import { auth, provider } from '../firebase';
 
