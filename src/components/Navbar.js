@@ -1,55 +1,56 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import { auth } from "../firebase";
+import { signOut } from "firebase/auth";
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
+
 class Navbar extends Component {
   constructor(props) {
     super(props);
+    const user = auth.currentUser;
+    
     this.state = {
-      active: props.active, // Initialize the active state with the prop value
+      active: props.active,
+      userID: user ? user.uid : "",
     };
   }
 
-  // Update the active state when the prop changes
-  componentDidUpdate(prevProps) {
-    if (prevProps.active !== this.props.active) {
-      this.setState({ active: this.props.active });
-    }
-  }
-
   render() {
-    const { active } = this.state; // Get the active state
-
+    const { active, userID } = this.state;
+  
     return (
       <nav className="h-max transition-colors ml-auto text-3xl font-semibold">
         <ul className="flex flex-row">
           <li>
             <Link
-              className={`text-bone mr-10 hover:text-sky duration-300 ${active === "home" ? "text-sky" : ""}`}
+              className={`text-bone mr-10 hover:text-sky duration-300 ${
+                active === "home" ? "text-sky" : ""
+              }`}
               to="/"
             >
-            Home
+              Home
             </Link>
           </li>
           <li>
             <Link
-              className={`text-bone mr-10 hover:text-sky duration-300 ${active === "search" ? "text-sky" : ""}`}
+              className={`text-bone mr-10 hover:text-sky duration-300 ${
+                active === "search" ? "text-sky" : ""
+              }`}
               to="/Search"
             >
-            Search
+              Search
             </Link>
           </li>
           <li>
-            <Link
-              className={`text-bone hover:text-sky duration-300 ${active === "login" ? "text-sky" : ""}`}
-              to="/Login"
-            >
-            Login
-            </Link>
+            {userID === "" ? <LoginButton active={active} /> : <LogoutButton auth={auth} />}
           </li>
         </ul>
       </nav>
     );
   }
+  
 }
 
 export default Navbar;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ReactComponent as GoogleSvg } from '../Assets/google-icon.svg';
 import { auth, provider } from '../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const LoginBox = () => {
   const [formData, setFormData] = useState({
