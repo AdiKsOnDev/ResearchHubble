@@ -1,5 +1,5 @@
 import Navbar from "./Navbar";
-import Logo from '../Assets/icons8-laboratory-100.png';
+import Logo from '../Assets/logo.png';
 
 function Header(props) {
   return ( 
