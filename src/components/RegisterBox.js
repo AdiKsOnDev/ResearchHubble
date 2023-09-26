@@ -5,7 +5,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-const LoginBox = () => {
+const RegisterBox = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -108,4 +108,4 @@ const LoginBox = () => {
   );
 };
 
-export default LoginBox;
+export default RegisterBox;
