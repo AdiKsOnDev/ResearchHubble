@@ -71,7 +71,7 @@ const RegisterBox = () => {
 
   return (
     <div className="flex flex-col bg-metal w-fit p-10 items-center rounded-lg">
-      <h2 className="font-semibold text-center mb-7 text-3xl text-bone">Sign In</h2>
+      <h2 className="font-semibold text-center mb-7 text-3xl text-bone">Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col justify-center items-center">
           <input
