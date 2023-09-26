@@ -35,7 +35,7 @@ const RegisterBox = () => {
     } else if(password.length < 8) {
       setFormData({ ...formData, error: 'Password\'s length should be at least 8 characters'})
       return;
-    } else if (password != passwordConfirm) {
+    } else if (password !== passwordConfirm) {
       setFormData({ ...formData, error: 'Passwords are not matching' });
       return;
     }
