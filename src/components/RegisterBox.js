@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { ReactComponent as GoogleSvg } from '../Assets/google-icon.svg';
 import { auth, provider } from '../firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
-const LoginBox = () => {
+const RegisterBox = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    passwordConfirm: '',
     error: '',
   });
 
@@ -26,21 +26,27 @@ const LoginBox = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { email, password } = formData;
+    const { email, password, passwordConfirm } = formData;
 
     // Basic validation - check if email and password are not empty
     if (!email || !password) {
       setFormData({ ...formData, error: 'Please enter E-Mail AND Password' });
       return;
+    } else if(password.length < 8) {
+      setFormData({ ...formData, error: 'Password\'s length should be at least 8 characters'})
+      return;
+    } else if (password !== passwordConfirm) {
+      setFormData({ ...formData, error: 'Passwords are not matching' });
+      return;
     }
 
     // You can add your authentication logic here
     // For this example, we'll just log the entered email and password
-    signInWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        navigate("/");
+        navigate("/Login");
 
         console.log(user);
       })
@@ -51,7 +57,7 @@ const LoginBox = () => {
         console.log(errorCode, errorMessage);
 
         // Reset the form fields
-        setFormData({ email: '', password: '', error: "Wrong E-Mail OR Password" });
+        setFormData({ email: '', password: '', passwordConfirm: '', error: "E-Mail is already in use" });
         return;
       });
   };
@@ -61,11 +67,11 @@ const LoginBox = () => {
     auth.signInWithPopup(provider);
   };
 
-  const { email, password, error } = formData;
+  const { email, password, passwordConfirm, error } = formData;
 
   return (
     <div className="flex flex-col bg-metal w-fit p-10 items-center rounded-lg">
-      <h2 className="font-semibold text-center mb-7 text-3xl text-bone">Sign In</h2>
+      <h2 className="font-semibold text-center mb-7 text-3xl text-bone">Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col justify-center items-center">
           <input
@@ -88,9 +94,19 @@ const LoginBox = () => {
             placeholder='Password'
           />
 
+          <input
+            type="password"
+            className='mb-5 p-2 rounded-md bg-bone'
+            id="passwordConfirm"
+            name="passwordConfirm"
+            value={passwordConfirm}
+            onChange={handleInputChange}
+            placeholder='Confirm Password'
+          />
+
           {error && <p className="text-blood italic mb-5 text-xs">{error}</p>}
 
-          <button className="text-bone bg-grass font-semibold text-lg px-8 py-2 w-30 rounded-md mb-5" type="submit">Login</button>
+          <button className="text-bone bg-grass font-semibold text-lg px-8 py-2 w-30 rounded-md mb-5" type="submit">Sign Up</button>
 
           <h1 className='font-semibold text-3xl text-bone mb-5'>OR</h1>
         </div>
@@ -98,14 +114,10 @@ const LoginBox = () => {
 
       <button className="flex flex-row items-center text-midnight text-lg text-left bg-bone font-semibold px-5 w-full rounded-md" onClick={googleAuth}>
         <GoogleSvg className='w-7 mr-8' />
-        <h1>Sign in using Google</h1>
+        <h1>Sign Up using Google</h1>
       </button>
-
-      <Link to="/Register" className='mt-7 text-bone hover:text-grass duration-300'>
-        Don't have an account?
-      </Link>
     </div>
   );
 };
 
-export default LoginBox;
+export default RegisterBox;
