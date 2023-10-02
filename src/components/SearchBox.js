@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 
-const SearchBox = ({ onSearch }) => {
+const SearchBox = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = () => {
-    onSearch(searchQuery);
+    
   };
 
   return (
-    <div className="relative flex items-center">
+    <div className="relative flex items-center w-1/2 h-14">
       <input
         type="text"
         placeholder="Search"
-        className="w-full px-4 py-2 border rounded-l-md focus:outline-none"
+        className="w-full h-full px-4 py-2 border rounded-l-md focus:outline-none"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       <button
-        className="px-4 py-2 bg-blue-500 text-white rounded-r-md"
+        className="px-4 py-2 h-full text-midnight bg-white font-semibold rounded-r-md hover:bg-grass duration-300 hover:text-white focus:outline-none"
         onClick={handleSearch}
       >
         Search

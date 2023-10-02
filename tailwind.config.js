@@ -7,6 +7,7 @@ module.exports = {
     colors: {
       'bone': '#ECEBEB',
       'sky': '#ADFDF6',
+      'white': '#FFFFFF',
       'midnight': '#0C0D11',
       'metal': '#1E1E1E',
       'grass': '#238636',
