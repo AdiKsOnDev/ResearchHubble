@@ -1,13 +1,13 @@
-import Header from "./Header";
-import LoginBox from "./LoginBox";
+import RegisterBox from "../RegisterBox";
+import Header from "../Header";
 
-function Login() {
+function Register() {
   return ( 
     <div className='flex flex-col bg-midnight min-w-max justify-center items-center h-screen'>
       <Header active="login"></Header>
-      <LoginBox></LoginBox>
+      <RegisterBox></RegisterBox>
     </div>
   );
 }
 
-export default Login;
+export default Register;
