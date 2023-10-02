@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ReactComponent as GoogleSvg } from '../Assets/google-icon.svg';
 import { auth, provider } from '../firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -37,28 +37,49 @@ const LoginBox = () => {
     // You can add your authentication logic here
     // For this example, we'll just log the entered email and password
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        navigate("/");
-
-        console.log(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
-        console.log(errorCode, errorMessage);
-
-        // Reset the form fields
-        setFormData({ email: '', password: '', error: "Wrong E-Mail OR Password" });
-        return;
-      });
+    .then((userCredential) => {
+      const user = userCredential.user;
+  
+      // Save user credentials to application state
+      // For example, you can set a user state with user information
+  
+      navigate("/");
+      console.log(user);
+    })
+    .catch((error) => {
+      // Handle login errors
+      console.error(error);
+  
+      setFormData({ email: '', password: '', error: "Wrong E-Mail OR Password" });
+    });
   };
 
   const googleAuth = () => {
     console.log("HEHE");
-    auth.signInWithPopup(provider);
+    const auth = getAuth();
+    setPersistence(auth, browserLocalPersistence);
+  signInWithPopup(auth, provider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    
+        navigate("/");
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+
   };
 
   const { email, password, error } = formData;
