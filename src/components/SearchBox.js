@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { database } from '../firebase';
 import { collection, query, getDocs, where } from 'firebase/firestore';
+import { Link } from 'react-router-dom';
 
 const SearchBox = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,8 +19,8 @@ const SearchBox = () => {
   };  
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="flex">
+    <div className="container mx-auto p-4 flex flex-col justify-center items-center">
+      <div className="flex w-full">
         <input
           type="text"
           placeholder="Search projects..."
@@ -34,14 +35,15 @@ const SearchBox = () => {
           Search
         </button>
       </div>
+      <Link to="/Add-Project" className='text-bone mt-5 font-semibold text-lg hover:text-sky duration-300'>Can't Find your project? Add it yourself</Link>
       <div className='flex flex-col justify-center items-center'>
-        {searchResults.map((result, index) => (
+        {searchResults != [] ? searchResults.map((result, index) => (
           <div key={index} className="mt-4 text-bone flex flex-col justify-center items-center bg-metal p-5 w-full rounded-md">
             <h2 className="text-2xl font-semibold">{result.Name}</h2>
             <p className='mt-2'><span className='font-semibold'>Contributors:</span> {result.Contributors}</p>
             <button className='px-5 py-2 bg-grass font-semibold mt-5 rounded-md hover:px-7 duration-300' href={result.Link}>Link</button>
           </div>
-        ))}
+        )) : ``}
       </div>
     </div>
   );
