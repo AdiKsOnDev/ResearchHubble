@@ -15,7 +15,6 @@ const SearchBox = () => {
   
     const results = querySnapshot.docs.map((doc) => doc.data());
     setSearchResults(results);
-    console.log(results);
   };  
 
   return (

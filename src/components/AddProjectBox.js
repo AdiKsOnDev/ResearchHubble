@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { doc, setDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { database } from '../firebase';
 
 const AddProjectBox = () => {
   const [formData, setFormData] = useState({
@@ -7,7 +8,7 @@ const AddProjectBox = () => {
     contributors: '',
     url: '',
     error: '',
-  });
+  }); 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -18,16 +19,35 @@ const AddProjectBox = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { name, contributors, url } = formData;
+
+    const projectsRef = collection(database, 'Projects');
+  
+    // Perform a Firestore query to search for projects
+    const querySnapshot = await getDocs(query(projectsRef, where("Name", ">=", name), where("Name", "<=", name)));
+    const results = querySnapshot.docs.map((doc) => doc.data());
 
     // Basic validation - check if name and contributors are not empty
     if (!name || !contributors || !url) {
       setFormData({ ...formData, error: 'Please enter valid Information' });
       return;
+    } else if (results != []) {
+      setFormData({ name: '', error: 'There already is a Project with this title'});
+      return;
     }
+
+    // Add a new document in collection "cities"
+    await setDoc(
+      doc(database, "Projects", name), 
+      {
+        Name: name,
+        Contributors: contributors,
+        Link: url
+      }
+    );
   };
 
   const { name, contributors, url, error } = formData;
@@ -44,7 +64,7 @@ const AddProjectBox = () => {
             name="name"
             value={name}
             onChange={handleInputChange}
-            placeholder='Name'
+            placeholder='Title'
           />
 
           <input
