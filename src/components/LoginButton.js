@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function LoginButton({ active }) {
+function LoginButton({ active, phase }) {
   return (
     <Link
       className={`text-bone hover:text-sky duration-300 ${
@@ -8,7 +8,7 @@ function LoginButton({ active }) {
       }`}
       to="/Login"
     >
-      Sign in
+      {phase == 2 ? "Sign in" :"Verifying" } 
     </Link>
   );
 }

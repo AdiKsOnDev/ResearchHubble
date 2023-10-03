@@ -6,13 +6,16 @@ import LogoutButton from "./LogoutButton";
 
 const Navbar = ({ active }) => {
   const [userID, setUserID] = useState("");
+  const [verifying, setVerifying] = useState(true);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setUserID(user.uid);
+        setVerifying(false); // Authentication persistence is known
       } else {
         setUserID("");
+        setVerifying(false); // Authentication persistence is known
       }
     });
 
@@ -43,7 +46,13 @@ const Navbar = ({ active }) => {
           </Link>
         </li>
         <li>
-          {userID === "" ? <LoginButton active={active} /> : <LogoutButton auth={auth} />}
+          {verifying ? (
+            <LoginButton active={active} phase={1} />
+          ) : userID === "" ? (
+            <LoginButton active={active} phase={2} />
+          ) : (
+            <LogoutButton auth={auth} />
+          )}
         </li>
       </ul>
     </nav>
