@@ -2,18 +2,30 @@ import React, { useState } from 'react';
 import { database } from '../firebase';
 import { collection, query, getDocs, where } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
-
+import Fuse from 'fuse.js';
 const SearchBox = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = async () => {
     const projectsRef = collection(database, 'Projects');
-  
-    // Perform a Firestore query to search for projects
-    const querySnapshot = await getDocs(query(projectsRef, where("Name", ">=", searchQuery), where("Name", "<=", searchQuery)));
-  
-    const results = querySnapshot.docs.map((doc) => doc.data());
+
+    // Perform a Firestore query to retrieve all projects
+    const querySnapshot = await getDocs(projectsRef);
+    const allProjects = querySnapshot.docs.map((doc) => doc.data());
+
+    // Create a Fuse instance for the data
+    const fuse = new Fuse(allProjects, {
+      keys: ['Name'], // Fields to search
+      includeMatches: true, // Include match information for ranking
+    });
+
+    // Perform the fuzzy search
+    const searchResults = fuse.search(searchQuery);
+
+    // Extract the matched documents
+    const results = searchResults.map((result) => result.item);
+
     setSearchResults(results);
   };  
 
