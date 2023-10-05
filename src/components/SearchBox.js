@@ -52,7 +52,7 @@ const SearchBox = () => {
           <div key={index} className="mt-4 text-bone flex flex-col justify-center items-center bg-metal p-5 w-full rounded-md">
             <h2 className="text-2xl font-semibold">{result.Name}</h2>
             <p className='mt-2'><span className='font-semibold'>Contributors:</span> {result.Contributors}</p>
-            <button className='px-5 py-2 bg-grass font-semibold mt-5 rounded-md hover:px-7 duration-300' href={result.Link}>Link</button>
+            <a href={result.Link}><button className='px-5 py-2 bg-grass font-semibold mt-5 rounded-md hover:px-7 duration-300'>Link</button></a>
           </div>
         )) : ``}
       </div>
