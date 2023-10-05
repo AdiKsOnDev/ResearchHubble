@@ -87,7 +87,7 @@ const AddProjectBox = () => {
         <div className="flex flex-col justify-center items-center">
           <input
             type="text"
-            className='mb-5 p-2 rounded-md bg-bone'
+            className='mb-5 p-2 w-full rounded-md bg-bone'
             id="name"
             name="name"
             value={name}
@@ -96,7 +96,7 @@ const AddProjectBox = () => {
           />
 
           <textarea
-            className='mb-5 p-20 rounded-md bg-bone'
+            className='mb-5 p-2 w-full h-28 rounded-md bg-bone'
             id="description"
             name="description"
             value={description}
@@ -106,7 +106,7 @@ const AddProjectBox = () => {
 
           <input
             type="contributors"
-            className='mb-5 p-2 rounded-md bg-bone'
+            className='mb-5 p-2 w-full rounded-md bg-bone'
             id="contributors"
             name="contributors"
             value={contributors}
@@ -116,7 +116,7 @@ const AddProjectBox = () => {
 
           <input
             type="url"
-            className='mb-5 p-2 rounded-md bg-bone'
+            className='mb-5 p-2 w-full rounded-md bg-bone'
             id="url"
             name="url"
             value={url}
@@ -125,7 +125,7 @@ const AddProjectBox = () => {
           />
 
           {/* Category checkboxes */}
-          
+
           <div className="mb-5 p-2 rounded-md bg-bone">
             <label>Select Categories:</label>
             <br></br>
@@ -146,7 +146,7 @@ const AddProjectBox = () => {
 
           <input
             type="text"
-            className='mb-5 p-2 rounded-md bg-bone'
+            className='mb-5 p-2 w-full rounded-md bg-bone'
             id="skillsNeeded"
             name="skillsNeeded"
             value={skillsNeeded}
