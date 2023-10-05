@@ -51,13 +51,13 @@ const SearchBox = () => {
         <div className='flex flex-col justify-center items-center'>
           {searchResults.map((result, index) => (
             <div key={index} className="mt-4 text-bone flex flex-col justify-center items-center bg-metal p-5 w-full rounded-md">
-              <h2 className="text-2xl font-semibold">{result.Name}</h2>
-              <p className="description text-center" style={{ width: '300px' }}> {/* Set the width here */}
+              <h2 className="text-2xl font-semibold mb-5">{result.Name}</h2>
+              {/* <p className="description text-center" style={{ width: '300px' }}>
                 <span className='font-semibold'>Description:</span> {result.Description}
-              </p>
-              <p><span className='font-semibold'>Skills Needed:</span> {result.SkillsNeeded}</p>
-              <p><span className='font-semibold'>Categories:</span> {result.Categories}</p>
-              <p><span className='font-semibold'>Contributors:</span> {result.Contributors}</p>
+              </p> */}
+              <p className='mb-1'><span className='font-semibold'>Skills Needed:</span> {result.SkillsNeeded}</p>
+              <p className='mb-1'><span className='font-semibold'>Categories:</span> {result.Categories}</p>
+              <p className='mb-1'><span className='font-semibold'>Contributors:</span> {result.Contributors}</p>
               <button className='px-5 py-2 bg-grass font-semibold mt-5 rounded-md hover:px-7 duration-300' href={result.Link}>Link</button>
             </div>
           ))}
