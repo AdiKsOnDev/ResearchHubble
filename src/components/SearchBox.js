@@ -9,25 +9,23 @@ const SearchBox = () => {
 
   const handleSearch = async () => {
     const projectsRef = collection(database, 'Projects');
-
-    // Perform a Firestore query to retrieve all projects
     const querySnapshot = await getDocs(projectsRef);
     const allProjects = querySnapshot.docs.map((doc) => doc.data());
-
+  
     // Create a Fuse instance for the data
     const fuse = new Fuse(allProjects, {
-      keys: ['Name'], // Fields to search
-      includeMatches: true, // Include match information for ranking
+      keys: ['Name', 'Description', 'Contributors', 'SkillsNeeded', 'Categories'],
+      includeMatches: true,
     });
-
+  
     // Perform the fuzzy search
     const searchResults = fuse.search(searchQuery);
-
+  
     // Extract the matched documents
     const results = searchResults.map((result) => result.item);
-
+  
     setSearchResults(results);
-  };  
+  };
 
   return (
     <div className="container mx-auto p-4 flex flex-col justify-center items-center">
@@ -52,7 +50,7 @@ const SearchBox = () => {
           <div key={index} className="mt-4 text-bone flex flex-col justify-center items-center bg-metal p-5 w-full rounded-md">
             <h2 className="text-2xl font-semibold">{result.Name}</h2>
             <p className='mt-2'><span className='font-semibold'>Contributors:</span> {result.Contributors}</p>
-            <a href={result.Link}><button className='px-5 py-2 bg-grass font-semibold mt-5 rounded-md hover:px-7 duration-300'>Link</button></a>
+            <a href={result.Link}>button className='px-5 py-2 bg-grass font-semibold mt-5 rounded-md hover:px-7 duration-300'>Link</button></a>
           </div>
         )) : ``}
       </div>
