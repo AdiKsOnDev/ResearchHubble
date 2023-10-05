@@ -35,6 +35,7 @@ const Navbar = ({ active }) => {
             Home
           </Link>
         </li>
+        
         <li>
           <Link
             className={`text-bone mr-10 hover:text-sky duration-300 ${
@@ -55,7 +56,9 @@ const Navbar = ({ active }) => {
           )}
         </li>
       </ul>
+      
     </nav>
+    
   );
 };
 
