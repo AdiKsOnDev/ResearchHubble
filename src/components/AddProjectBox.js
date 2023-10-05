@@ -56,9 +56,11 @@ const AddProjectBox = () => {
     // Basic validation - check if name, contributors, and url are not empty
     if (!name || !contributors || !url || categories.length === 0) {
       setFormData({ ...formData, error: 'Please enter valid information and select at least one category' });
+
       return;
     } else if (results.length > 0) {
       setFormData({ ...formData, name: '', error: 'There is already a project with this title' });
+
       return;
     }
 
@@ -122,22 +124,23 @@ const AddProjectBox = () => {
             placeholder='Link'
           />
 
-        {/* Category checkboxes */}
-<div className="mb-5 p-2 rounded-md bg-bone">
-  <label>Select Categories:</label>
-  <br></br>
-  {categoriesOptions.map((category) => (
-    <label key={category}>
-      <input
-        type="checkbox"
-        value={category}
-        checked={formData.categories.includes(category)}
-        onChange={() => handleCategoryChange(category)}
-      />
-      {category}
-    </label>
-  ))}
-</div>
+          {/* Category checkboxes */}
+          
+          <div className="mb-5 p-2 rounded-md bg-bone">
+            <label>Select Categories:</label>
+            <br></br>
+            {categoriesOptions.map((category) => (
+              <label key={category}>
+                <input
+                  type="checkbox"
+                  value={category}
+                  checked={formData.categories.includes(category)}
+                  onChange={() => handleCategoryChange(category)}
+                />
+                {category}
+              </label>
+            ))}
+          </div>
 
           {/* End of Category checkboxes */}
 

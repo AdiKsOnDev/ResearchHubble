@@ -26,14 +26,6 @@ const SearchBox = () => {
   
     setSearchResults(results);
   };
-  
-  
-  
-  
-  
-  
-  
-  
 
   return (
     
@@ -60,7 +52,7 @@ const SearchBox = () => {
           {searchResults.map((result, index) => (
             <div key={index} className="mt-4 text-bone flex flex-col justify-center items-center bg-metal p-5 w-full rounded-md">
               <h2 className="text-2xl font-semibold">{result.Name}</h2>
-              <p className="description" style={{ width: '300px' }}> {/* Set the width here */}
+              <p className="description text-center" style={{ width: '300px' }}> {/* Set the width here */}
                 <span className='font-semibold'>Description:</span> {result.Description}
               </p>
               <p><span className='font-semibold'>Skills Needed:</span> {result.SkillsNeeded}</p>
