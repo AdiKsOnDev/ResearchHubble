@@ -6,10 +6,7 @@ import {
   doc,
   getDoc,
   setDoc,
-  collection,
-  query,
-  where,
-  getDocs,
+  collection
 } from 'firebase/firestore';
 import { auth, database } from '../firebase';
 

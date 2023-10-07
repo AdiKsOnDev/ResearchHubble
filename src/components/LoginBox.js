@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ReactComponent as GoogleSvg } from '../Assets/google-icon.svg';
 import { auth, provider } from '../firebase';
-import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, setPersistence, browserLocalPersistence } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -61,23 +61,15 @@ const LoginBox = () => {
   signInWithPopup(auth, provider)
   .then((result) => {
     // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    
-        navigate("/");
+    navigate("/");
     // IdP data available using getAdditionalUserInfo(result)
     // ...
   }).catch((error) => {
     // Handle Errors here.
     const errorCode = error.code;
     const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
+
+    console.log(errorCode, errorMessage);
   });
 
   };
