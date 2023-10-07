@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { database, auth } from '../firebase';
-import { useNavigate } from 'react-router-dom';
 import {
   doc,
   getDoc,
-  setDoc,
   collection,
-  query,
-  where,
-  deleteDoc,
-  getDocs,
+  deleteDoc
 } from 'firebase/firestore';
 
 async function fetchUserData(userId) {
@@ -52,7 +47,6 @@ function UserProfile({ user }) {
     }
     loadUserData();
   }, [user, description]);
-  const navigate = useNavigate()
   async function handleResetClick() {
     try {
       // Get the current user's email
@@ -79,7 +73,7 @@ function UserProfile({ user }) {
   
 
   return (
-    <div className="p-24 scrollbar scrollbar-juicy-peach flex flex-col bg-metal p-10 items-center rounded-lg" style={{ width: '50%', maxWidth: 800, height: description ? '71%' : '55%', maxHeight: '1000px', overflowY: 'auto' }}>
+    <div className="scrollbar scrollbar-juicy-peach flex flex-col bg-metal p-10 items-center rounded-lg" style={{ width: '50%', maxWidth: 800, height: description ? '71%' : '55%', maxHeight: '1000px', overflowY: 'auto' }}>
       <header className="px-6 pt-4 pb-2">
         <h1 className="font-semibold text-3xl text-center mb-7 text-bone">{displayName|| "User"}'s Profile</h1>
       </header>
