@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { database } from '../firebase';
-import { collection, query, getDocs, where } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
 import Fuse from 'fuse.js';
 import { ReactComponent as ManuscriptSVG } from '../Assets/manuscript.svg';
