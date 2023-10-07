@@ -20,6 +20,7 @@ const ProfileSettingsBox = () => {
     description: '', // Store JSON in the description
     skills: {},
   });
+  const [saveButton, setSaveButton] = useState('Save');
   const [updated, setUpdated] = useState('');
   const [summary, setSummary] = useState('');
   const [editedSummary, setEditedSummary] = useState('');
@@ -31,6 +32,7 @@ const ProfileSettingsBox = () => {
   
       if (cvFile) {
         try {
+          setSaveButton("Processing");
           const cvText = await extractTextFromPDF(cvFile);
   
           setFormData((prevData) => ({
@@ -50,6 +52,7 @@ const ProfileSettingsBox = () => {
             ...prevData,
             skills: FullSummaryObj.skills,
           }));
+          setSaveButton("Save");
         } catch (error) {
           console.error('Error reading the CV file:', error);
         }
@@ -107,7 +110,7 @@ const ProfileSettingsBox = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+  setSaveButton("Saved");
     try {
       // Update the user's display name in Firebase Authentication
       await updateProfile(auth.currentUser, {
@@ -131,7 +134,7 @@ const ProfileSettingsBox = () => {
         await setDoc(userDocRef, {
           description: jsonDescription,
           email: auth.currentUser.email,
-          'display-name': formData.name,
+          'display_name': formData.name,
         }, { merge: true });
         console.log('Firestore document updated');
         setUpdated("updated")
@@ -140,9 +143,12 @@ const ProfileSettingsBox = () => {
         await setDoc(userDocRef, {
           description: jsonDescription,
           email: auth.currentUser.email,
-          'display-name': formData.name,
+          'display_name': formData.name,
         });
+        
         console.log('New Firestore document created');
+
+        window.location.reload()
       }
     } catch (error) {
       console.error('Error updating profile and Firestore document:', error);
@@ -205,7 +211,7 @@ const ProfileSettingsBox = () => {
           ))}
         </div>
         <button className="text-bone bg-grass font-semibold text-lg px-8 py-2 w-30 rounded-md" type="submit">
-          {updated?"Saved":"Save"}
+          {saveButton}
         </button>
       </div>
     </form>
