@@ -1,9 +1,9 @@
 import { ReactComponent as ManuscriptSVG } from '../Assets/manuscript.svg';
 
-function Project(prLink, prDescription, prName, prSaved) {
+function Project({ prLink, prDescription, prName, prSaved }) {
   return ( 
     <div className='flex flex-col justify-center items-center w-full'>
-      <div key={prName} className="mt-4 text-bone flex flex-row justify-around items-center w-full bg-metal p-5">
+      <div className="mt-4 text-bone flex flex-row justify-around items-center w-full bg-metal p-5">
         <div className='flex flex-col w-1/4'>
           <a className="text-2xl font-semibold w-fit flex mb-2 text-sky hover:underline" href={prLink}>{prName}</a>
           <p className="description text-bone font-thin"> {/* Set the width here */}
