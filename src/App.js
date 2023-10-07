@@ -7,7 +7,7 @@ import Register from './components/pages/Register';
 import Home from './components/pages/Home';
 import Search from './components/pages/Search';
 import AddProject from './components/pages/AddProject';
-
+import Profile from './components/pages/Profile';
 function App() {
   return (
   <Router>
@@ -18,6 +18,8 @@ function App() {
         <Route path="/Register" element={<Register />} />
         <Route path="/Search" element={<Search />} />
         <Route path="/Add-Project" element={<AddProject />} />
+        <Route path="/Profile" element={<Profile />} />
+
       </Routes>
     </div>
   </Router>

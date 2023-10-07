@@ -47,7 +47,7 @@ const AddProjectBox = () => {
     e.preventDefault();
     const { name, description, contributors, url, categories, skillsNeeded } = formData;
 
-    const projectsRef = collection(database, 'Projects');
+    const projectsRef = collection(database , 'Projects');
 
     // Perform a Firestore query to search for projects
     const querySnapshot = await getDocs(query(projectsRef, where("Name", ">=", name), where("Name", "<=", name)));

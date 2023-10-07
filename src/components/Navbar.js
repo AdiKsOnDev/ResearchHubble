@@ -47,6 +47,23 @@ const Navbar = ({ active }) => {
           </Link>
         </li>
         <li>
+        {verifying ? (
+           <></>
+          ) : userID === "" ? (
+            <></>
+          ) : (
+            <Link
+            className={`text-bone mr-10 hover:text-sky duration-300 ${
+              active === "profile" ? "text-sky" : ""
+            }`}
+            to="/Profile"
+          >
+            Profile
+          </Link>
+          )}
+         
+        </li>
+        <li>
           {verifying ? (
             <LoginButton active={active} phase={1} />
           ) : userID === "" ? (
@@ -55,6 +72,7 @@ const Navbar = ({ active }) => {
             <LogoutButton auth={auth} />
           )}
         </li>
+        
       </ul>
       
     </nav>
