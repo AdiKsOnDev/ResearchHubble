@@ -3,6 +3,7 @@ import Fuse from 'fuse.js';
 import { database } from '../../firebase';
 import fetch from "node-fetch";
 import returnKey from './apiKey';
+
 async function fetchUserDetails(userEmail) {
   try {
     const docRef = doc(collection(database, 'Users'), userEmail);
