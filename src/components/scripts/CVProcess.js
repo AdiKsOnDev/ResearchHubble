@@ -1,6 +1,6 @@
 import OpenAI from 'openai';
 import returnKey from './apiKey';
-const openai = new OpenAI({ apiKey: returnKey(), dangerouslyAllowBrowser: true });
+const openai = new OpenAI({ apiKey: returnKey("OpenAI"), dangerouslyAllowBrowser: true });
 
 const prompt = `
 Based on the given CV, summarize it with ONLY KEY points and list skills with the persons proefficency 
