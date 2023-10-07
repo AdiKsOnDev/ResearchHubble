@@ -161,7 +161,7 @@ const ProfileSettingsBox = () => {
   
 
   return (
-    <div className="p-24 scrollbar scrollbar-juicy-peach flex flex-col bg-metal p-10 items-center rounded-lg" style={{ width: '50%', height: summary? '80%': '55%', maxHeight: '1000px', overflowY: 'auto' }}>
+    <div className="scrollbar scrollbar-juicy-peach flex flex-col bg-metal p-10 items-center rounded-lg" style={{ width: '50%', height: summary? '80%': '55%', maxHeight: '1000px', overflowY: 'auto' }}>
       <h1 className="font-semibold text-3xl text-center mb-7 text-bone">Profile Settings</h1>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col justify-center items-center">
