@@ -6,7 +6,7 @@ const prompt = `
 Based on the given CV, summarize it with ONLY KEY points and list skills with the persons proefficency 
 in them rated on a scale of "Novice", "Intermediate", "Advanced" and "Expert"
 The JSON string returned should be in the following format:
-The selected skills should be concise
+The selected skills should be concise, the skills should only contain letters in the english alphabet, nothing else
 {
   "summary": "key points in cv",
   "skills": {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { updateProfile } from 'firebase/auth';
 import CVProcess from './scripts/CVProcess';
+import '../scrollbar.css';
 import {
   doc,
   getDoc,
@@ -22,46 +23,70 @@ const ProfileSettingsBox = () => {
     description: '', // Store JSON in the description
     skills: {},
   });
+  const [updated, setUpdated] = useState('');
   const [summary, setSummary] = useState('');
+  const [editedSummary, setEditedSummary] = useState('');
   const handleInputChange = async (e) => {
     const { name, value, files } = e.target;
-
+  
     if (name === 'cv') {
       const cvFile = files[0];
-
+  
       if (cvFile) {
         try {
           const cvText = await extractTextFromPDF(cvFile);
-          setFormData({
-            ...formData,
+  
+          setFormData((prevData) => ({
+            ...prevData,
             cv: cvFile,
             cvText: cvText,
-          });
+          }));
+  
           const newSummary = await CVProcess(cvText);
           const FullSummaryObj = JSON.parse(newSummary);
+  
           setSummary(FullSummaryObj.summary);
-          setFormData((prevFormData) => ({
-            ...prevFormData,
+          setEditedSummary(FullSummaryObj.summary);
+  
+          // Don't forget to update the skills as well
+          setFormData((prevData) => ({
+            ...prevData,
             skills: FullSummaryObj.skills,
           }));
         } catch (error) {
           console.error('Error reading the CV file:', error);
         }
       } else {
-        setFormData({
-          ...formData,
+        // Clear the CV fields if no file is selected
+        setFormData((prevData) => ({
+          ...prevData,
           cv: null,
           cvText: '',
-        });
-        setSummary('');
+        }));
       }
+    } else if (name === 'summary') {
+      setEditedSummary(value);
+    } else if (name.startsWith('skills.')) {
+      // Handle changes for skills drop-downs
+      const skillName = name.split('.')[1];
+      const skillValue = value;
+  
+      setFormData((prevData) => ({
+        ...prevData,
+        skills: {
+          ...prevData.skills,
+          [skillName]: skillValue,
+        },
+      }));
     } else {
-      setFormData({
-        ...formData,
+      // For other input fields (name, etc.), update them directly
+      setFormData((prevData) => ({
+        ...prevData,
         [name]: value,
-      });
+      }));
     }
   };
+  
   const extractTextFromPDF = async (pdfFile) => {
     try {
       const pdfjs = require('pdfjs-dist/build/pdf');
@@ -94,7 +119,7 @@ const ProfileSettingsBox = () => {
   
       // Create a JSON object based on the updated data
       const jsonDescription = JSON.stringify({
-        summary: formData.cvText,
+        summary: editedSummary, // Use the edited summary text
         skills: formData.skills,
       });
   
@@ -112,6 +137,7 @@ const ProfileSettingsBox = () => {
           'display-name': formData.name,
         }, { merge: true });
         console.log('Firestore document updated');
+        setUpdated("updated")
       } else {
         // Create a new document for the user
         await setDoc(userDocRef, {
@@ -129,64 +155,66 @@ const ProfileSettingsBox = () => {
   
 
   return (
-    <div className="flex flex-col bg-metal p-10 items-center rounded-lg">
+    <div className="p-24 scrollbar scrollbar-juicy-peach flex flex-col bg-metal p-10 items-center rounded-lg" style={{ width: '50%', height: summary? '80%': '55%', maxHeight: '1000px', overflowY: 'auto' }}>
       <h1 className="font-semibold text-3xl text-center mb-7 text-bone">Profile Settings</h1>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col justify-center items-center">
-          <input
-            type="text"
-            className="mb-5 p-2 w-full rounded-md bg-bone"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            placeholder="Display Name"
-          />
-          <input
-            type="file"
-            accept=".pdf"
-            className="mb-5 p-2 w-full rounded-md bg-bone"
-            name="cv"
-            onChange={handleInputChange}
-            placeholder="Upload CV (PDF only)"
-          />
+        <input
+          type="text"
+          className="mb-5 p-2 w-full rounded-md bg-bone"
+          name="name"
+          value={formData.name}
+          onChange={handleInputChange}
+          placeholder="Display Name"
+        />
+        <input
+          type="file"
+          accept=".pdf"
+          className="mb-5 p-2 w-full rounded-md bg-bone"
+          name="cv"
+          onChange={handleInputChange}
+          placeholder="Upload CV (PDF only)"
+        />
+        {summary && (
+          <textarea
+          rows="4"
+          className="scrollbar-juicy-peach mb-5 p-2 w-full rounded-md bg-bone"
+          name="summary"
+          value={editedSummary} 
+          onChange={handleInputChange}
+          placeholder="Summary"
+        />
+        
+        )}
+        <div className="mb-5">
           {summary && (
-            <textarea
-              rows="4"
-              className="mb-5 p-2 w-full rounded-md bg-bone"
-              name="summary"
-              value={summary}
-              onChange={handleInputChange}
-              placeholder="Summary"
-            />
+            <h2 className="text-bone text-lg font-semibold mb-2">Skills</h2>
           )}
-          <div className="mb-5">
-            {summary && (
-            <h2 className="text-bone text-lg font-semibold mb-2">Skills</h2>)
-}
-            {Object.keys(formData.skills).map((skill) => (
-              <div key={skill} className="mb-3">
-                <label htmlFor={`skills.${skill}`} className="text-bone font-medium">{skill}</label>
-                <select
-                  name={`skills.${skill}`}
-                  value={formData.skills[skill]}
-                  onChange={handleInputChange}
-                  className="rounded-md bg-bone w-full p-2"
-                >
-                  {skillLevels.map((level) => (
-                    <option key={level} value={level}>
-                      {level}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ))}
-          </div>
-          <button className="text-bone bg-grass font-semibold text-lg px-8 py-2 w-30 rounded-md" type="submit">
-            Save
-          </button>
+          {Object.keys(formData.skills).map((skill) => (
+            <div key={skill} className="mb-3">
+              <label htmlFor={`skills.${skill}`} className="text-bone font-medium">{skill}</label>
+              <select
+  name={`skills.${skill}`}
+  value={formData.skills[skill]}
+  onChange={handleInputChange}
+  className="rounded-md w-full p-2"
+>
+  {skillLevels.map((level) => (
+    <option key={level} value={level} className="hover:bg-grass">
+      {level}
+    </option>
+  ))}
+</select>
+
+            </div>
+          ))}
         </div>
-      </form>
-    </div>
+        <button className="text-bone bg-grass font-semibold text-lg px-8 py-2 w-30 rounded-md" type="submit">
+          {updated?"Saved":"Save"}
+        </button>
+      </div>
+    </form>
+  </div>
   );
 };
 
