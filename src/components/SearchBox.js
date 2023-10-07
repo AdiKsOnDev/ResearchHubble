@@ -47,7 +47,7 @@ const SearchBox = () => {
         </button>
       </div>
       <Link to="/Add-Project" className='text-bone mt-5 font-semibold text-lg hover:text-sky duration-300'>Can't Find your project? Add it yourself</Link>
-      <div className='flex flex-col justify center items-center bg-metal w-fit mt-5'>
+      <div className='flex flex-col justify center items-center bg-metal w-fit mt-5 rounded-md'>
         {searchResults.length !== 0 ? searchResults.map((result, index) => (
           <div key={result.Name} className='flex flex-col justify-center items-center w-full'>
             <Project prLink={result.Link} prDescription={result.Description} prName={result.Name} prSaved={result.Saved}></Project>
