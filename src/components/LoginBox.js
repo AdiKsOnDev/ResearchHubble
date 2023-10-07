@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ReactComponent as GoogleSvg } from '../Assets/google-icon.svg';
 import { auth, provider } from '../firebase';
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, setPersistence, browserLocalPersistence } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, setPersistence, browserLocalPersistence } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
