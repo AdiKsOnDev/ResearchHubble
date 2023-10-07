@@ -5,7 +5,7 @@ import { database, auth } from '../../firebase';
 import {
   doc,
   getDoc,
-  collection,
+  collection
 } from 'firebase/firestore';
 import ProfilePage from '../UserProfile';
 
