@@ -15,7 +15,7 @@ function HomeBox() {
         <h1 className="text-bone text-3xl font-semibold">{userName}</h1>
         <h2 className="text-bone text-sm">User's ID</h2>
 
-        <a href="" className="w-3/4 text-center border-t-2 border-bone mt-8 text-sky p-5 text-xl font-semibold hover:underline">Saved Projects</a>
+        <a href="/" className="w-3/4 text-center border-t-2 border-bone mt-8 text-sky p-5 text-xl font-semibold hover:underline">Saved Projects</a>
       </div>
       
       {/* Recommendations */}
