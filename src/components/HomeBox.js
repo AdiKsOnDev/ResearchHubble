@@ -4,6 +4,7 @@ import fetchUserData from "./scripts/fetchUserData";
 import recommendProjects from "./scripts/recommenderSystem";
 import Project from "./Project";
 import getTopProjects from "./scripts/getTopProjects"
+import { Link } from "react-router-dom";
 
 function HomeBox() {
   const [displayName, setDisplayName] = useState("Guest");
@@ -75,7 +76,7 @@ function HomeBox() {
         <h1 className="text-bone text-3xl font-semibold">{displayName}</h1>
         <h2 className="text-bone text-sm">{auth.currentUser.email}</h2>
 
-        <a href="/" className="w-3/4 text-center border-t-2 border-bone mt-8 text-sky pt-5 text-xl font-semibold hover:underline">Profile</a>
+        <Link to="/Profile" className="w-3/4 text-center border-t-2 border-bone mt-8 text-sky pt-5 text-xl font-semibold hover:underline">Profile</Link>
       </div>
       
       {/* Recommendations */}
