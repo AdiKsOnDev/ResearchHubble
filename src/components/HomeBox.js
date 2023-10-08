@@ -37,7 +37,6 @@ function HomeBox() {
 
     // Cleanup the listener when the component unmounts.
     return () => unsubscribe();
-   
   }, []);
 
   useEffect(() => {
@@ -66,13 +65,11 @@ function HomeBox() {
       {/* Recommendations */}
     
       <div className='flex flex-col justify center items-center bg-metal w-fit mt-5 rounded-md'>
-       
-       {projects.length !== 0 ? projects.map((recommendation) => (
-  <div key={recommendation.project.Name} className='flex flex-col justify-center items-center w-full'>
-    <Project prLink={recommendation.project.Link} prDescription={recommendation.project.Description} prName={recommendation.project.Name} prSaved={recommendation.Saved}></Project>
-  </div>
-)) : ''}
-
+        {projects.length !== 0 ? projects.map((recommendation) => (
+          <div key={recommendation.project.Name} className='flex flex-col justify-center items-center w-full'>
+            <Project prLink={recommendation.project.Link} prDescription={recommendation.project.Description} prName={recommendation.project.Name} prSaved={recommendation.Saved}></Project>
+          </div>
+        )) : ''}
       </div>
 
       {/* Trending projects */}
