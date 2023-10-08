@@ -2,27 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { database, auth } from '../firebase';
 import {
   doc,
-  getDoc,
   collection,
   deleteDoc
 } from 'firebase/firestore';
+import fetchUserData from '../components/scripts/fetchUserData';
 
-async function fetchUserData(userId) {
-  try {
-    const docRef = doc(collection(database, 'Users'), userId);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      console.log(docSnap.data());
-      return docSnap.data();
-    } else {
-      console.log("No such document!");
-    }
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
-}
 
 function UserProfile({ user }) {
   const [displayName, setDisplayName] = useState('');
