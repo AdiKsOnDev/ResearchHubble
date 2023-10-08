@@ -6,7 +6,10 @@ import {
   doc,
   getDoc,
   setDoc,
-  collection
+  collection,
+  query,
+  where,
+  getDocs,
 } from 'firebase/firestore';
 import { auth, database } from '../firebase';
 
@@ -20,6 +23,7 @@ const ProfileSettingsBox = () => {
     description: '', // Store JSON in the description
     skills: {},
   });
+  const [saveButton, setSaveButton] = useState('Save');
   const [updated, setUpdated] = useState('');
   const [summary, setSummary] = useState('');
   const [editedSummary, setEditedSummary] = useState('');
@@ -31,6 +35,7 @@ const ProfileSettingsBox = () => {
   
       if (cvFile) {
         try {
+          setSaveButton("Processing");
           const cvText = await extractTextFromPDF(cvFile);
   
           setFormData((prevData) => ({
@@ -50,6 +55,7 @@ const ProfileSettingsBox = () => {
             ...prevData,
             skills: FullSummaryObj.skills,
           }));
+          setSaveButton("Save");
         } catch (error) {
           console.error('Error reading the CV file:', error);
         }
@@ -107,7 +113,7 @@ const ProfileSettingsBox = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+  setSaveButton("Saved");
     try {
       // Update the user's display name in Firebase Authentication
       await updateProfile(auth.currentUser, {
@@ -131,7 +137,7 @@ const ProfileSettingsBox = () => {
         await setDoc(userDocRef, {
           description: jsonDescription,
           email: auth.currentUser.email,
-          'display-name': formData.name,
+          'display_name': formData.name,
         }, { merge: true });
         console.log('Firestore document updated');
         setUpdated("updated")
@@ -140,17 +146,22 @@ const ProfileSettingsBox = () => {
         await setDoc(userDocRef, {
           description: jsonDescription,
           email: auth.currentUser.email,
-          'display-name': formData.name,
+          'display_name': formData.name,
         });
+        
         console.log('New Firestore document created');
+
+        window.location.reload()
       }
     } catch (error) {
       console.error('Error updating profile and Firestore document:', error);
     }
   };
   
+  
+
   return (
-    <div className="scrollbar scrollbar-juicy-peach flex flex-col bg-metal p-10 items-center rounded-lg" style={{ width: '50%', height: summary ? '80%': '55%', maxHeight: '1000px', overflowY: 'auto' }}>
+    <div className="p-24 scrollbar scrollbar-juicy-peach flex flex-col bg-metal p-10 items-center rounded-lg" style={{ width: '50%', height: summary? '80%': '55%', maxHeight: '1000px', overflowY: 'auto' }}>
       <h1 className="font-semibold text-3xl text-center mb-7 text-bone">Profile Settings</h1>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col justify-center items-center">
@@ -205,7 +216,7 @@ const ProfileSettingsBox = () => {
           ))}
         </div>
         <button className="text-bone bg-grass font-semibold text-lg px-8 py-2 w-30 rounded-md" type="submit">
-          {updated?"Saved":"Save"}
+          {saveButton}
         </button>
       </div>
     </form>

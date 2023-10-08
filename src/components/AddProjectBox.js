@@ -13,7 +13,7 @@ const AddProjectBox = () => {
     error: '',
   });
 
-  const categoriesOptions = ["AI", "Sciences", "Other","Other2","Other3","Other4","Other5"]; // Add your category options here
+  const categoriesOptions = ["AI", "Sciences", "Content Writing","Environmental Science","SpaceResearch","Psychology","Other"]; // Add your category options here
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
