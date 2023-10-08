@@ -4,6 +4,8 @@ import { collection, query, getDocs, where } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import Fuse from "fuse.js";
 import { ReactComponent as ManuscriptSVG } from "../Assets/manuscript.svg";
+import { auth } from "../firebase";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 const SearchBox = () => {
   const [searchQuery, setSearchQuery] = useState("");
