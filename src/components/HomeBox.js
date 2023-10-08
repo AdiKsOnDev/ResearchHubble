@@ -68,14 +68,14 @@ function HomeBox() {
   }, [loggedIn]);
 
   return ( 
-    <div className="flex flex-row h-screen justify-center mt-28">
+    <div className="flex flex-row h-max justify-center mt-28">
       {/* User Card */}
-      <div className="mt-12 bg-metal h-1/2 min-h-fit min-w-fit w-2/4 mx-12 rounded-md flex flex-col justify-center items-center">
+      <div className="py-10 mt-12 bg-metal h-1/2 min-h-fit min-w-fit w-2/4 mx-12 rounded-md flex flex-col justify-center items-center">
         <img alt="name" src="https://eu.ui-avatars.com/api/?name=Guest&size=250" class="mb-10 h-36 w-36 rounded-full" />
         <h1 className="text-bone text-3xl font-semibold">{displayName}</h1>
-        <h2 className="text-bone text-sm">User's ID</h2>
+        <h2 className="text-bone text-sm">{auth.currentUser.email}</h2>
 
-        <a href="/" className="w-3/4 text-center border-t-2 border-bone mt-8 text-sky p-5 text-xl font-semibold hover:underline">Saved Projects</a>
+        <a href="/" className="w-3/4 text-center border-t-2 border-bone mt-8 text-sky pt-5 text-xl font-semibold hover:underline">Profile</a>
       </div>
       
       {/* Recommendations */}
