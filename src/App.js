@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './styles.css';
-
+import ProjectPages from './components/pages/ProjectPages';
 // Components
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
@@ -19,7 +19,7 @@ function App() {
         <Route path="/Search" element={<Search />} />
         <Route path="/Add-Project" element={<AddProject />} />
         <Route path="/Profile" element={<Profile />} />
-
+        <Route path="/projects/:projectName" element={<ProjectPages/>} />
       </Routes>
     </div>
   </Router>

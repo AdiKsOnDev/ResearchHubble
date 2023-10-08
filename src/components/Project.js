@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { auth, database } from "../firebase";
 import { collection, doc, updateDoc } from "firebase/firestore";
 import fetchUserData from "./scripts/fetchUserData";
+import { Link } from "react-router-dom";
 
 function Project({ prLink, prDescription, prName, prSaved }) {
   const [userObj, setUserObj] = useState({});
@@ -80,12 +81,15 @@ function Project({ prLink, prDescription, prName, prSaved }) {
     <div className="flex flex-col justify-center items-center w-full">
       <div className="mt-4 text-bone flex flex-row justify-around items-center w-full bg-metal p-5">
         <div className="flex flex-col w-1/4">
-          <a
+        
+          <Link to = {"/projects/" +prName }
             className="text-2xl font-semibold w-fit flex mb-2 text-sky hover:underline"
-            href={prLink}
-          >
-            {prName}
-          </a>
+            
+          >{prName}</Link>
+        
+          
+            
+          
           <p className="description text-bone font-thin">{prDescription}</p>
 
           <div className="w-full">
