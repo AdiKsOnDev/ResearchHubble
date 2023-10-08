@@ -6,6 +6,7 @@ import Fuse from "fuse.js";
 import { ReactComponent as ManuscriptSVG } from "../Assets/manuscript.svg";
 import { auth } from "../firebase";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import Project from "./Project";
 
 const SearchBox = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -165,38 +166,9 @@ const SearchBox = () => {
         Can't Find your project? Add it yourself
       </Link>
       <div className="flex flex-col justify center items-center bg-metal w-fit mt-5">
-        {searchResults != [] ? searchResults.map((result, index) => (
-          <div className="flex flex-col justify-center items-center w-full">
-            <div
-              key={index}
-              className="mt-4 text-bone flex flex-row justify-around items-center w-full bg-metal p-5"
-            >
-              <div className="flex flex-col w-1/4">
-                <a
-                  className="text-2xl font-semibold w-fit flex mb-2 text-sky hover:underline"
-                  href={result.Link}
-                >
-                  {result.Name}
-                </a>
-                <p className="description text-bone font-thin">
-                  {" "}
-                  {/* Set the width here */}
-                  {result.Description}
-                </p>
-                <div className="w-full">
-                  <p className="mt-2 flex flex-row">
-                    <icon className="flex flex-row items-center justify-center">
-                      <ManuscriptSVG className="h-5 w-5 mr-2 mt-2" />{" "}
-                      <p className="font-semibold mr-3">{result.Saved}</p>
-                    </icon>
-                  </p>
-                </div>
-              </div>
-              <button className="flex flex-row justify-center items-center px-5 py-2 bg-grass font-semibold rounded-md hover:px-7 duration-300">
-                <ManuscriptSVG className="h-5 w-5 mr-2" />
-                Save
-              </button>
-            </div>
+        {searchResults.length !== 0 ? searchResults.map((result, index) => (
+          <div key={result.Name} className='flex flex-col justify-center items-center w-full'>
+            <Project prLink={result.Link} prDescription={result.Description} prName={result.Name} prSaved={result.Saved}></Project>
           </div>
         )) : ``}
       </div>
