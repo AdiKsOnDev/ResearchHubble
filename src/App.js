@@ -8,6 +8,8 @@ import Home from './components/pages/Home';
 import Search from './components/pages/Search';
 import AddProject from './components/pages/AddProject';
 import Profile from './components/pages/Profile';
+import Chat from './components/pages/Chat';
+
 function App() {
   return (
   <Router>
@@ -20,6 +22,7 @@ function App() {
         <Route path="/Add-Project" element={<AddProject />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/projects/:projectName" element={<ProjectPages/>} />
+        <Route path="/Chat" element={<Chat />} />
       </Routes>
     </div>
   </Router>
