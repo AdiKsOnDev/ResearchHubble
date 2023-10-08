@@ -7,7 +7,7 @@ async function getTopProjects() {
   const querySnapshot = await getDocs(projectsRef);
   const allProjects = querySnapshot.docs.map((doc) => doc.data());
 
-  const sortedProjects = allProjects.sort((a, b) => a.Saved - b.Saved);
+  const sortedProjects = allProjects.sort((a, b) => b.Saved - a.Saved);
 
   return sortedProjects.slice(0, 2);
 }

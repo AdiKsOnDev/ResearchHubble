@@ -70,7 +70,8 @@ function HomeBox() {
   return ( 
     <div className="flex flex-row h-screen justify-center mt-28">
       {/* User Card */}
-      <div className="mt-12 bg-metal h-1/4 min-h-fit min-w-fit w-2/4 mx-12 rounded-md flex flex-col justify-center items-center">
+      <div className="mt-12 bg-metal h-1/2 min-h-fit min-w-fit w-2/4 mx-12 rounded-md flex flex-col justify-center items-center">
+        <img alt="name" src="https://eu.ui-avatars.com/api/?name=Guest&size=250" class="mb-10 h-36 w-36 rounded-full" />
         <h1 className="text-bone text-3xl font-semibold">{displayName}</h1>
         <h2 className="text-bone text-sm">User's ID</h2>
 
