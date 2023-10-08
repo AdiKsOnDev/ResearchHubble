@@ -37,7 +37,6 @@ function HomeBox() {
 
     // Cleanup the listener when the component unmounts.
     return () => unsubscribe();
-  
   }, []);
 
   useEffect(() => {
