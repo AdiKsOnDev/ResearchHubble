@@ -5,13 +5,10 @@ import { database, auth } from '../../firebase';
 import {
   doc,
   getDoc,
-  setDoc,
-  collection,
-  query,
-  where,
-  getDocs,
+  collection
 } from 'firebase/firestore';
 import ProfilePage from '../UserProfile';
+
 function Profile() {
   const [stateComplete, setStateComplete] = useState("loading");
   const [userDoc, setUserDoc] = useState(null);
@@ -41,9 +38,9 @@ function Profile() {
   return (
     <div className="flex flex-col bg-midnight min-w-max justify-center items-center h-screen">
       <Header active="profile" />
-      {stateComplete == "Done" ? (
-       <ProfilePage/>
-      ) : stateComplete == "None"?(
+      {stateComplete === "Done" ? (
+        <ProfilePage/>
+      ) : stateComplete === "None"?(
         <ProfileSettingsBox />
       ):<></>}
     </div>

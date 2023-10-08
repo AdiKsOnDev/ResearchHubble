@@ -8,7 +8,7 @@ function LoginButton({ active, phase }) {
       }`}
       to="/Login"
     >
-      {phase == 2 ? "Sign in" :"Verifying" } 
+      {phase === 2 ? "Sign in" :"Verifying" } 
     </Link>
   );
 }

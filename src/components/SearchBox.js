@@ -4,11 +4,6 @@ import { collection, query, getDocs, where } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import Fuse from "fuse.js";
 import { ReactComponent as ManuscriptSVG } from "../Assets/manuscript.svg";
-import { ReactComponent as ManuscriptFilled } from "../Assets/manuscriptfill.svg"; // Filled SVG
-import { doc, updateDoc } from "firebase/firestore";
-import { auth } from "../firebase";
-import { getDoc, setDoc } from "firebase/firestore";
-import { deleteDoc } from "firebase/firestore";
 
 const SearchBox = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -196,21 +191,9 @@ const SearchBox = () => {
                       </p>
                     </div>
                   </div>
-                  <button
-                    className="flex flex-row justify-center items-center px-5 py-2 bg-grass font-semibold rounded-md hover:px-7 duration-300"
-                    onClick={() => handleSave(result)}
-                  >
-                    {result.IsSaved ? (
-                      <>
-                        <ManuscriptFilled className="h-5 w-5 mr-2" />
-                        Unsave
-                      </>
-                    ) : (
-                      <>
-                        <ManuscriptSVG className="h-5 w-5 mr-2" />
-                        Save
-                      </>
-                    )}
+                  <button className="flex flex-row justify-center items-center px-5 py-2 bg-grass font-semibold rounded-md hover:px-7 duration-300">
+                    <ManuscriptSVG className="h-5 w-5 mr-2" />
+                    Save
                   </button>
                 </div>
               </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ReactComponent as GoogleSvg } from '../Assets/google-icon.svg';
 import { auth, provider } from '../firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, setPersistence, browserLocalPersistence, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterBox = () => {
@@ -64,7 +64,21 @@ const RegisterBox = () => {
 
   const googleAuth = () => {
     console.log("HEHE");
-    auth.signInWithPopup(provider);
+    const auth = getAuth();
+    setPersistence(auth, browserLocalPersistence);
+    signInWithPopup(auth, provider)
+    .then((result) => {
+      navigate("/");
+      // IdP data available using getAdditionalUserInfo(result)
+      // ...
+    }).catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      
+      console.log(errorCode, errorMessage)
+      // The email of the user's account used.
+    });
   };
 
   const { email, password, passwordConfirm, error } = formData;
@@ -114,7 +128,7 @@ const RegisterBox = () => {
 
       <button className="flex flex-row items-center text-midnight text-lg text-left bg-bone font-semibold px-5 w-full rounded-md" onClick={googleAuth}>
         <GoogleSvg className='w-7 mr-8' />
-        <h1>Sign Up using Google</h1>
+        <h1>Sign in using Google</h1>
       </button>
     </div>
   );
