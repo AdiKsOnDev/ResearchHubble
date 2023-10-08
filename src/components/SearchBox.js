@@ -165,6 +165,7 @@ const SearchBox = () => {
       >
         Can't Find your project? Add it yourself
       </Link>
+      
       <div className="flex flex-col justify center items-center bg-metal w-fit mt-5">
         {searchResults.length !== 0 ? searchResults.map((result, index) => (
           <div key={result.Name} className='flex flex-col justify-center items-center w-full'>
