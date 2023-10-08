@@ -53,9 +53,9 @@ function HomeBox() {
   }, [loggedIn]);
 
   return ( 
-    <div className="flex flex-row h-screen justify-center items-center">
+    <div className="flex flex-row h-screen justify-center mt-28">
       {/* User Card */}
-      <div className="bg-metal h-1/4 min-h-fit min-w-fit w-1/3 rounded-md flex flex-col justify-center items-center">
+      <div className="mt-12 bg-metal h-1/4 min-h-fit min-w-fit w-1/4 mx-12 rounded-md flex flex-col justify-center items-center">
         <h1 className="text-bone text-3xl font-semibold">{displayName}</h1>
         <h2 className="text-bone text-sm">User's ID</h2>
 
@@ -63,17 +63,17 @@ function HomeBox() {
       </div>
       
       {/* Recommendations */}
-      <div className='flex flex-col justify center items-center bg-metal w-fit mt-5 rounded-md'>
+      <div className='flex flex-col justify center items-center bg-metal w-fit rounded-md mt-12'>
         {projects.length !== 0 ? projects.map((recommendation) => (
           <div key={recommendation.project.Name} className='flex flex-col justify-center items-center w-full'>
-            <Project prLink={recommendation.project.Link} prDescription={recommendation.project.Description} prName={recommendation.project.Name} prSaved={recommendation.Saved}></Project>
+            <Project prLink={recommendation.project.Link} prDescription={recommendation.project.Description} prName={recommendation.project.Name} prSaved={recommendation.project.Saved}></Project>
           </div>
         )) : ''}
       </div>
 
       {/* Trending projects */}
       <div>
-
+        
       </div>
     </div>
   );
