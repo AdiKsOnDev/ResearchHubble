@@ -9,9 +9,9 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import Project from "./Project";
 
 const SearchBox = () => {
+
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [savedProjects, setSavedProjects] = useState([]);
 
   const handleSearch = async () => {
     const projectsRef = collection(database, "Projects");
@@ -39,108 +39,7 @@ const SearchBox = () => {
     setSearchResults(results);
   };
 
-  const handleSave = async (result) => {
-    const isSaved = savedProjects.some(
-      (savedProject) => savedProject.Name === result.Name
-    );
 
-    // Get the current user
-    const user = auth.currentUser;
-
-    if (!user) {
-      // Handle the case where the user is not authenticated
-      console.log("User is not authenticated");
-      return;
-    }
-
-    const userId = user.email;
-
-    // Reference to the user's document in Firestore
-    const userDocRef = doc(database, "Users", userId);
-
-    // Fetch the user's document
-    const userDocSnapshot = await getDoc(userDocRef);
-    const userData = userDocSnapshot.data();
-
-    if (!userData || !userData["saved-projects"]) {
-      // If userData or "saved-projects" array doesn't exist, create it
-      const newSavedProjects = [result.ref];
-
-      // Update the user's document with the new "saved-projects" array
-      await setDoc(
-        userDocRef,
-        { "saved-projects": newSavedProjects },
-        { merge: true }
-      );
-    } else {
-      // If "saved-projects" array exists, check if the project is already saved
-      const isProjectSaved = userData["saved-projects"].some(
-        (savedProject) => savedProject.projectName === result.Name
-      );
-
-      if (!isProjectSaved) {
-        // If the project is not saved, add it to the "saved-projects" array
-        const updatedSavedProjects = [
-          ...userData["saved-projects"],
-          { projectName: result.Name },
-        ];
-
-        // Update the user's document with the updated "saved-projects" array
-        await setDoc(
-          userDocRef,
-          { "saved-projects": updatedSavedProjects },
-          { merge: true }
-        );
-      }
-    }
-
-    if (isSaved) {
-      // Remove the project from savedProjects
-      setSavedProjects(
-        savedProjects.filter(
-          (savedProject) => savedProject.Name !== result.Name
-        )
-      );
-
-      // Decrement the Saved property and update in searchResults
-      const updatedSearchResults = searchResults.map((searchResult) => {
-        if (searchResult.Name === result.Name) {
-          return {
-            ...searchResult,
-            Saved: searchResult.Saved - 1,
-            IsSaved: false,
-          };
-        }
-        return searchResult;
-      });
-      setSearchResults(updatedSearchResults);
-
-      // Decrement the Saved property in Firebase
-      const projectRef = doc(database, "Projects", result.Name);
-      await updateDoc(projectRef, { Saved: result.Saved - 1 });
-    } else {
-      // Increment the Saved property and add the project to savedProjects
-      const updatedResult = {
-        ...result,
-        Saved: result.Saved + 1,
-        IsSaved: true,
-      };
-      setSavedProjects([...savedProjects, updatedResult]);
-
-      // Increment the Saved property in searchResults
-      const updatedSearchResults = searchResults.map((searchResult) => {
-        if (searchResult.Name === result.Name) {
-          return updatedResult;
-        }
-        return searchResult;
-      });
-      setSearchResults(updatedSearchResults);
-
-      // Increment the Saved property in Firebase
-      const projectRef = doc(database, "Projects", result.Name);
-      await updateDoc(projectRef, { Saved: result.Saved + 1 });
-    }
-  };
 
   return (
     <div className="container mx-auto p-4 flex flex-col justify-center items-center">
