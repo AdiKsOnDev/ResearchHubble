@@ -173,6 +173,7 @@ const ProfileSettingsBox = () => {
           onChange={handleInputChange}
           placeholder="Display Name"
         />
+        <h1 className='text-bone my-5 font-semibold'>Upload your CV!</h1>
         <input
           type="file"
           accept=".pdf"

@@ -81,12 +81,14 @@ function HomeBox() {
       
       {/* Recommendations */}
       <div className='flex flex-col justify center items-center bg-metal w-fit rounded-md mt-12'>
-      <h1 className="my-10 text-bone font-semibold text-3xl">Perfect picks, just for you</h1>
+        <h1 className="my-10 text-bone font-semibold text-3xl">Perfect picks, just for you</h1>
         {projects.length !== 0 ? projects.map((recommendation) => (
           <div key={recommendation.project.Name} className='flex flex-col justify-center items-center w-full'>
             <Project prLink={recommendation.project.Link} prDescription={recommendation.project.Description} prName={recommendation.project.Name} prSaved={recommendation.project.Saved}></Project>
           </div>
-        )) : ''}
+        )) : (
+          <h1 className="my-10 text-bone font-semibold text-3xl">You have to Configure your Profile!</h1>
+        )}
       </div>
 
       {/* Trending projects */}
