@@ -2,7 +2,7 @@ import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import Fuse from 'fuse.js';
 import { database } from '../../firebase';
 import fetch from "node-fetch";
-import returnKey from './apiKey';
+import returnKey from './keyReturn';
 
 async function fetchUserDetails(userEmail) {
   try {

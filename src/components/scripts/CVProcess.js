@@ -1,5 +1,5 @@
 import OpenAI from 'openai';
-import returnKey from './apiKey';
+import returnKey from './keyReturn';
 const openai = new OpenAI({ apiKey: returnKey("OpenAI"), dangerouslyAllowBrowser: true });
 
 const prompt = `

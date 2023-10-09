@@ -1,6 +1,6 @@
 function returnKey(x){
   let y = "";
-  y = x == "OpenAI" ? caesarDecipher("zr-NTUjeINzb6HKx7wuokGrA3IsirMQ0prX12lIjg2HGgtXYlip",7) : x == "HF" ? caesarDecipher("om_paAubNNyAcdsbBvXTVAjGdqzoCUfJIDSWJ",7):"" ;
+  y = x === "OpenAI" ? caesarDecipher("zr-NTUjeINzb6HKx7wuokGrA3IsirMQ0prX12lIjg2HGgtXYlip",7) : x === "HF" ? caesarDecipher("om_paAubNNyAcdsbBvXTVAjGdqzoCUfJIDSWJ",7):"" ;
   return y;
 }
 
