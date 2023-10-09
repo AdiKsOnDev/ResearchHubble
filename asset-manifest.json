@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/ResearchHubble/static/css/main.ec9c7003.css",
-    "main.js": "/ResearchHubble/static/js/main.8dd4661a.js",
-    "static/media/logo.png": "/ResearchHubble/static/media/logo.1e7c882f5923155832ba.png",
-    "static/media/manuscriptfill.svg": "/ResearchHubble/static/media/manuscriptfill.397f1236a10c4b0ef07d504bba694b95.svg",
-    "static/media/google-icon.svg": "/ResearchHubble/static/media/google-icon.15b6cb611e2ef4ea86dc62873e5c6db5.svg",
-    "index.html": "/ResearchHubble/index.html",
-    "static/media/manuscript.svg": "/ResearchHubble/static/media/manuscript.0a66811baa2b065271e33b03b84330b7.svg",
-    "main.ec9c7003.css.map": "/ResearchHubble/static/css/main.ec9c7003.css.map",
-    "main.8dd4661a.js.map": "/ResearchHubble/static/js/main.8dd4661a.js.map"
+    "main.css": "/Login/static/css/main.ec9c7003.css",
+    "main.js": "/Login/static/js/main.fcdd8915.js",
+    "static/media/logo.png": "/Login/static/media/logo.1e7c882f5923155832ba.png",
+    "static/media/manuscriptfill.svg": "/Login/static/media/manuscriptfill.397f1236a10c4b0ef07d504bba694b95.svg",
+    "static/media/google-icon.svg": "/Login/static/media/google-icon.15b6cb611e2ef4ea86dc62873e5c6db5.svg",
+    "index.html": "/Login/index.html",
+    "static/media/manuscript.svg": "/Login/static/media/manuscript.0a66811baa2b065271e33b03b84330b7.svg",
+    "main.ec9c7003.css.map": "/Login/static/css/main.ec9c7003.css.map",
+    "main.fcdd8915.js.map": "/Login/static/js/main.fcdd8915.js.map"
   },
   "entrypoints": [
     "static/css/main.ec9c7003.css",
-    "static/js/main.8dd4661a.js"
+    "static/js/main.fcdd8915.js"
   ]
 }
