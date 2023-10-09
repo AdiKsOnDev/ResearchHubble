@@ -13,6 +13,8 @@
 
 # misc
 .env
+apiKey.js
+keyReturn.js
 .DS_Store
 .env.local
 .env.development.local

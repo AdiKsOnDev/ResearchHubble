@@ -200,18 +200,17 @@ const ProfileSettingsBox = () => {
             <div key={skill} className="mb-3">
               <label htmlFor={`skills.${skill}`} className="text-bone font-medium">{skill}</label>
               <select
-  name={`skills.${skill}`}
-  value={formData.skills[skill]}
-  onChange={handleInputChange}
-  className="rounded-md w-full p-2"
->
-  {skillLevels.map((level) => (
-    <option key={level} value={level} className="hover:bg-grass">
-      {level}
-    </option>
-  ))}
-</select>
-
+                name={`skills.${skill}`}
+                value={formData.skills[skill]}
+                onChange={handleInputChange}
+                className="rounded-md w-full p-2"
+              >
+                {skillLevels.map((level) => (
+                  <option key={level} value={level} className="hover:bg-grass">
+                    {level}
+                  </option>
+                ))}
+              </select>
             </div>
           ))}
         </div>
